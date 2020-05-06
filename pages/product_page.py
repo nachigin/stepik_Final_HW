@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
+import pytest
 #import time
 
 class ProductPage(BasePage):
@@ -23,3 +24,20 @@ class ProductPage(BasePage):
         basket_cost = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL).text
         assert product_prise == basket_cost, f'{product_prise} is not {basket_cost}'
         #time.sleep(1)
+
+    @pytest.mark.xfail
+    def test_guest_cant_see_success_message_after_adding_product_to_basket(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESAGE), ('Success message is not present')
+
+    def test_guest_cant_see_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESAGE), ('Success message is not present')
+
+    @pytest.mark.xfail
+    def test_message_disappeared_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESAGE), ('Success message is not present')
+
+
+
+
+
+
