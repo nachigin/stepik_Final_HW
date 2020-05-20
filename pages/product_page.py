@@ -1,3 +1,4 @@
+# !в комментах только тот код который был нужен для обучения
 from .base_page import BasePage
 from .locators import ProductPageLocators
 import pytest
