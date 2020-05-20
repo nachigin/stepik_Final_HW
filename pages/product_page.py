@@ -19,7 +19,7 @@ class ProductPage(BasePage):
 
     def should_be_product_added_to_basket_by_cost(self):
         # реализует проверку что товар добавлен в корзину, проверка цены в корзине
-        assert self.is_element_present(*ProductPageLocators.BASKET_TOTAL), ('Total cost message is not ptesent')
+        assert self.is_element_present(*ProductPageLocators.BASKET_TOTAL), ('Total cost message is not present')
         product_prise = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         basket_cost = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL).text
         assert product_prise == basket_cost, f'{product_prise} is not {basket_cost}'
