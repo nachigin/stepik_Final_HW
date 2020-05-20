@@ -1,6 +1,10 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 import pytest
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 #import time
 
 class ProductPage(BasePage):
@@ -36,6 +40,13 @@ class ProductPage(BasePage):
     def test_message_disappeared_after_adding_product_to_basket(self):
         assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESAGE), ('Success message is not present')
 
+    def is_not_element_present(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return True
+
+        return False
 
 
 
